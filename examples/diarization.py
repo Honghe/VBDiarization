@@ -5,27 +5,26 @@
 # Author: Jan Profant <jan.profant@phonexia.com>
 # All Rights Reserved
 
-import os
-import sys
+import argparse
 import ctypes
 import logging
-import argparse
 import multiprocessing
+import os
 import subprocess
+import sys
 
 import numpy as np
 
-from vbdiar.scoring.gplda import GPLDA
-from vbdiar.vad import get_vad
-from vbdiar.utils import mkdir_p
-from vbdiar.utils.utils import Utils
 from vbdiar.embeddings.embedding import extract_embeddings
-from vbdiar.scoring.diarization import Diarization
-from vbdiar.scoring.normalization import Normalization
-from vbdiar.kaldi.onnx_xvector_extraction import ONNXXVectorExtraction
 from vbdiar.features.segments import get_segments, get_time_from_frames, get_frames_from_time
 from vbdiar.kaldi.mfcc_features_extraction import KaldiMFCCFeatureExtraction
-
+from vbdiar.kaldi.onnx_xvector_extraction import ONNXXVectorExtraction
+from vbdiar.scoring.diarization import Diarization
+from vbdiar.scoring.gplda import GPLDA
+from vbdiar.scoring.normalization import Normalization
+from vbdiar.utils import mkdir_p
+from vbdiar.utils.utils import Utils
+from vbdiar.vad import get_vad
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -291,6 +290,7 @@ if __name__ == '__main__':
     # run diarization
     diar = Diarization(args.input_list, embeddings, embeddings_mean=mean, lda=lda,
                        use_l2_norm=use_l2_norm, plda=plda, norm=norm)
+
     result = diar.score_embeddings(args.min_window_size, args.max_num_speakers, args.mode)
 
     if args.mode == 'diarization':
