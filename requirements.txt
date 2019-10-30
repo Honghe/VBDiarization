@@ -6,3 +6,4 @@ onnxruntime
 spherecluster
 pyclustering
 kaldiio
+gevent

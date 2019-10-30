@@ -2,7 +2,7 @@
 ## How to use
 In this examples director, run 
 ```
-python server.py
+python main.py
 ```
 And open `host:5001/index` to the index Page to upload file for Diarization.  
 Open `host:5001` to browser files.

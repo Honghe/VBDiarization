@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 import logging
-import mimetypes
 import os
-from multiprocessing.pool import Pool
 
 from flask import Flask, request, send_from_directory, Response
 from flask_autoindex import AutoIndex
@@ -93,7 +91,7 @@ def nlp_upload():
                     json.dumps({'filename': filename, 'task_id': file_basename, 'path': task_path},
                                ensure_ascii=False)))
 
-        pool.apply(diarization_task, (task_path, file_basename, filename, num_speakers))
+        diarization_task(task_path, file_basename, filename, num_speakers)
 
         rttm_file_name = os.path.splitext(filename)[0] + '.rttm'
         with open(os.path.join('rttm', rttm_file_name)) as f:
@@ -119,5 +117,4 @@ def nlp_upload():
 
 
 if __name__ == '__main__':
-    pool = Pool(3)
     app.run(host='0.0.0.0', debug=True, port=5001, threaded=True)
