@@ -68,10 +68,7 @@ def rttm2json(rttm):
             temp = {
                 'start': float(result[3]),
                 'end': round(float(result[3]) + float(result[4]), 3),
-                'attributes': {},
-                'data': {
-                    'who': int(result[-2][-1])
-                }
+                'who': int(result[-2][-1])
             }
             Json.append(temp)
 
