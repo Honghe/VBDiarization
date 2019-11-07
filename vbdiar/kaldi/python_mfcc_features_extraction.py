@@ -9,8 +9,9 @@ class PythonMFCCFeatureExtraction():
 
     def audio2features(self, input_path):
         (rate, sig) = wavfile.read(input_path)
-        mfcc_feat = mfcc(sig, rate)
+        mfcc_feat = mfcc(sig, rate, numcep=23)
         # TODO temporarily add 2 feats to meet Kaldi_mfcc_features_extraction API
         mfcc_feat = np.append(mfcc_feat, [mfcc_feat[-1]], axis=0)
         mfcc_feat = np.append(mfcc_feat, [mfcc_feat[-1]], axis=0)
+        mfcc_feat = mfcc_feat.astype(np.float32)
         return mfcc_feat
