@@ -19,6 +19,7 @@ from vbdiar.embeddings.embedding import extract_embeddings
 from vbdiar.features.segments import get_segments, get_time_from_frames, get_frames_from_time
 from vbdiar.kaldi.mfcc_features_extraction import KaldiMFCCFeatureExtraction
 from vbdiar.kaldi.onnx_xvector_extraction import ONNXXVectorExtraction
+from vbdiar.kaldi.python_mfcc_features_extraction import PythonMFCCFeatureExtraction
 from vbdiar.scoring.diarization import Diarization
 from vbdiar.scoring.gplda import GPLDA
 from vbdiar.scoring.normalization import Normalization
@@ -232,9 +233,10 @@ if __name__ == '__main__':
     config_path = os.path.abspath(config_mfcc['config_path'])
     if not os.path.isfile(config_path):
         raise ValueError(f'Path to MFCC configuration `{config_path}` not found.')
-    features_extractor = KaldiMFCCFeatureExtraction(
-        config_path=config_path, apply_cmvn_sliding=config_mfcc['apply_cmvn_sliding'],
-        norm_vars=config_mfcc['norm_vars'], center=config_mfcc['center'], cmn_window=config_mfcc['cmn_window'])
+    # features_extractor = KaldiMFCCFeatureExtraction(
+    #     config_path=config_path, apply_cmvn_sliding=config_mfcc['apply_cmvn_sliding'],
+    #     norm_vars=config_mfcc['norm_vars'], center=config_mfcc['center'], cmn_window=config_mfcc['cmn_window'])
+    features_extractor = PythonMFCCFeatureExtraction()
 
     config_embedding_extractor = config['EmbeddingExtractor']
     embedding_extractor = ONNXXVectorExtraction(onnx_path=os.path.abspath(config_embedding_extractor['onnx_path']))
