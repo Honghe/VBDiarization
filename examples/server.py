@@ -60,6 +60,20 @@ def error_callback(arg):
     logger.info('error_callback')
     logger.error(arg)
 
+def rttm2json(rttm):
+    Json = []
+    for line in rttm.split('\n'):
+        if not line == '':
+            result = line.split(' ')
+            temp = {
+                'start': float(result[3]),
+                'end': round(float(result[3]) + float(result[4]), 3),
+                'who': int(result[-2][-1])
+            }
+            Json.append(temp)
+
+    return json.dumps(Json)
+
 
 @app.route('/rttm/<path:path>', methods=['GET'])
 def static_rttm(path):
@@ -96,8 +110,8 @@ def nlp_upload():
         rttm_file_name = os.path.splitext(filename)[0] + '.rttm'
         with open(os.path.join('rttm', rttm_file_name)) as f:
             rttm = f.read()
-        return Response(rttm,
-                        mimetype='text/plain'
+        return Response(rttm2json(rttm),
+                        mimetype='application/json'
                         )
         # not work
         # redirect(os.path.join('rttm', os.path.splitext(filename)[0] + '.rttm'))
