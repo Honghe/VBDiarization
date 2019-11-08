@@ -1,9 +1,13 @@
 # Modification
 Use Python MFCC features extraction instead of Kaldi MFCC in inference stage. So We don't have to install Kaldi in inference server.
 See `vbdiar/kaldi/python_mfcc_features_extraction.py`  
-two package is used:
+Two packages is used:
 - https://github.com/ZitengWang/python_kaldi_features
 - https://github.com/astorfi/speechpy
+
+## How to use
+1. Install requirements in `requirements.txt`. Do not `python setup.py install`.
+2. In examples directory, run ``PYTHONPATH=`pwd`../ main.py``.
 
 # vbdiar
 
