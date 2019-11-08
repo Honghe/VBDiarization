@@ -7,3 +7,4 @@ spherecluster
 pyclustering
 kaldiio
 gevent
+speechpy

@@ -1,3 +1,10 @@
+# Modification
+Use Python MFCC features extraction instead of Kaldi MFCC in inference stage. So We don't have to install Kaldi in inference server.
+See `vbdiar/kaldi/python_mfcc_features_extraction.py`  
+two package is used:
+- https://github.com/ZitengWang/python_kaldi_features
+- https://github.com/astorfi/speechpy
+
 # vbdiar
 
 Speaker diarization based on x-vectors using pretrained model trained in Kaldi (https://github.com/kaldi-asr/kaldi) 
@@ -6,7 +13,6 @@ and converted to ONNX format (https://github.com/onnx/onnx) running in ONNXRunti
 X-vector model was trained using VoxCeleb1 and VoxCeleb2 16k data (http://www.robots.ox.ac.uk/~vgg/data/voxceleb/index.html#about).
 
 If you make use of the code or model, cite this: https://www.vutbr.cz/en/students/final-thesis/detail/122072
- 
 
 ## Dependencies
 
